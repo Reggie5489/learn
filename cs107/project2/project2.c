@@ -3,7 +3,7 @@
 
 int main()
 {
-
+printf("test\n");
 int manipulate, constant; // variable which will be used later in the function
 int row = 20, col = 20; // row and col variable is defining current matrix size in row x col
 int mat[20][20];
