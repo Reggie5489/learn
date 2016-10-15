@@ -1,15 +1,22 @@
+// Author: Reginald M. Jefferson
+// Version: October 14, 2016
+// Class: CS 107
+// Section: 11:00 AM
+// Description: Project 2
+
 #include <stdio.h>
 #include <stdlib.h>
 
 int main()
 {
-printf("test\n");
-int manipulate, constant; // variable which will be used later in the function
-int row = 20, col = 20; // row and col variable is defining current matrix size in row x col
-int mat[20][20];
-
-// initialize matrix to zero
-for(int i = 0;i < row;++i)
+int userValueEntered;   // variable for user values entered
+int multiplier;   // used as multiplier value from user
+int row = 20,   // max row size intialized to 20
+int col = 20;   // max col size initialized to 20
+int mat[20][20];   // array
+int choice;   // user input menu choice
+  
+for(int i = 0;i < row;++i)   // matrix is initially zero by zero
 {
   for(int j = 0;j < col;++j)
   {
@@ -17,129 +24,148 @@ for(int i = 0;i < row;++i)
   }
 }
 
-// infinite Loop until user press 5(Exit)
-while(1)
+while(1)   // program will continue unless user enters 5
 {
-  // Display Main Menu
-  printf("Main Menu\n1) Enter Matrix\n2) Manipulate Rows\n3) Manipulate Columns\n4) Print Matrix\n5) Exit\n");
-  int choice;
+ 
+  printf("Main Menu"); // Main Menu is printed
+  printf("1) Enter Matrix\n");
+  printf("2) Manipulate Rows\n");
+  printf("3) Manipulate Columns\n");
+  printf("4) Print Matrix\n");
+  printf("5) Exit\n");
+ 
   printf("Please enter your choice:\n");
-  scanf("%d",&choice); // Enter your choice
+  scanf("%d",&choice);   // Your Choice
 
-  // Switch case to choose the menu depending on the user input
-  // We could use if else too but switch looks more elegant
-  // and easy in this scenario
-  switch(choice){
+  switch(choice)
+  {
   case 1:
     printf("Please enter the number of rows in the matrix:\n");
     scanf("%d",&row);
     printf("Please enter the number of columns in the matrix:\n");
     scanf("%d", &col);
 
-    //now new row and col is changed
-
-    //Take the input of each row
-    for(int i = 0;i < row;++i) {
+    for(int i = 0;i < row;++i)   // Row Input Data
+    {
       printf("Please enter the data for row %d:\n",i + 1);
-      for(int j = 0;j < col;++j){
+      for(int j = 0;j < col;++j)
+      {
         scanf("%d",&mat[i][j]);
       }
     }
     break;
-    case 2:
-    // to manipulate the rows
-    printf("Manipulate the Rows of the Matrix\n1) add two rows and replace second row\n2) multiply row by constant\n3) return to main menu\n");
+    
+    case 2: // Row Manipulation
+    printf("Manipulate the Rows of the Matrix\n");
+    printf("1) add two rows and replace second row\n");
+    printf("2) multiply row by constant\n");
+    printf("3) return to main menu\n");
     printf("Please enter your choice:\n");
-    scanf("%d",&manipulate);
-
-    // Another switch case to decide what operation we should perform
-    switch(manipulate){
+    scanf("%d",&userValueEntered);
+      
+    switch(userValueEntered)
+    {
       case 1:
-        printf("Please enter the two row you want to add separated by space\n");
-        int a,b;
+        printf("Please enter the two rows you want to add separated by space\n");
+        int a;   // Row 1 of operation
+        int b;   // Row 2 of operation 
         scanf("%d%d",&a,&b);
-        --a;--b;// making it 0 based
-        // add the value of row b to row a
-        //check if a and b is between 0 and row
-        if(a >= row || a < 0 || b >= row || b < 0){
-        printf("Invalid input\nReturn to Main Menu\n");
-        break;
+        --a;--b;
+        
+        if(a >= row || a < 0 || b >= row || b < 0)
+        {
+           printf("Invalid input\nReturn to Main Menu\n");   // error if invalid or return to main menu
+           break;
         }
-        for(int j = 0;j < col;++j){
-        mat[a][j] += mat[b][j];
+        
+        for(int j = 0;j < col;++j)
+        {
+           mat[a][j] += mat[b][j];
         }
-        //To delete the row b, we need to shift up all the row below b and decrement row size
-        for(int i = b + 1;i < row;++i){
-        for(int j = 0;j < col;++j){
-        mat[i - 1][j] = mat[i][j];
+        
+        for(int i = b + 1;i < row;++i)   // Row Replacement 
+        {
+           for(int j = 0;j < col;++j)
+           {
+              mat[i - 1][j] = mat[i][j];
+           }
         }
-        }
-        --row;
-        break;
+              --row;
+           break;
       case 2:
         printf("Which row would you like to multiply, followed by the constant you would like to use:\n");
-        int r;
-        scanf("%d%d",&r,&constant);
-        // check if r is valid or not
+        int r;   // row user picks for multiplication
+        scanf("%d%d",&r,&multiplier);
         --r;
-        if(r >= row || r < 0){
+        if(r >= row || r < 0)
+        {
           printf("Invalid input\nReturn to Main Menu\n");
           break;
         }
-
-        // multiply each value of row r with that constant
-        for(int j = 0;j < col;++j){
-        mat[r][j] *= constant;
+        
+        for(int j = 0;j < col;++j)
+        {
+           mat[r][j] *= multiplier;   // multiplication of constant and row
         }
-        break;
-        default:
-        break;
-      }
+           break;
+           default:
+           break;
+        }
+      
       break;
-      case 3:
-        // to manipulate the columbns
-        printf("Manipulate the Columns of the Matrix\n1) add two Columns and replace second Column\n2) multiply Column by constant\n3) return to main menu\n");
+      
+      case 3:   // to manipulate the columns
+        printf("Manipulate the Columns of the Matrix\n");
+        printf("1) add two Columns and replace second Column\n");
+        printf("2) multiply Column by constant\n");
+        printf("3) return to main menu\n");
         printf("Please enter your choice:\n");
-        scanf("%d",&manipulate);
+        scanf("%d",&multiplier);
 
-        // Another switch case to decide what operation we should perform
-        switch(manipulate){
+        switch(userValueEntered)
+        {
           case 1:
-            printf("Please enter the two Columns you want to add separated by space\n");
-            int a,b;
+            printf("Please enter the two columns you want to add, separate by a space\n");
+            int a;   // column 1
+            int b;   // column 2
             scanf("%d%d",&a,&b);
-            --a;--b;// making it 0 based
-            // add the value of Column b to Column a
-            //check if a and b is between 0 and col
-            if(a >= col || a < 0 || b >= col || b < 0){
-            printf("Invalid input\nReturn to Main Menu\n");
+            --a;--b;
+            if(a >= col || a < 0 || b >= col || b < 0)
+            {
+               printf("Invalid input\n");
+               printf("Return to Main Menu\n");
             break;
             }
-            for(int j = 0;j < row;++j){
-            mat[j][a] += mat[j][b];
+            
+            for(int j = 0;j < row;++j)
+            {
+               mat[j][a] += mat[j][b];
             }
-            //To delete the Column b, we need to shift left all the Columns right of b and decrement Column size
-            for(int i = b + 1;i < col;++i){
-            for(int j = 0;j < row;++j){
-            mat[j][i - 1] = mat[j][i - 1];
+           
+            for(int i = b + 1;i < col;++i)   // Column Shifting
+            {
+               for(int j = 0;j < row;++j)
+               {
+                  mat[j][i - 1] = mat[j][i - 1];
+               }
             }
-            }
-            --col;
+               --col;
             break;
           case 2:
-            printf("Which Column would you like to multiply, followed by the constant you would like to use:\n");
+            printf("Which Column would you like to multiply and by what constant value you would like to multiply it by:\n");
             int c;
-            scanf("%d%d",&c,&constant);
+            scanf("%d%d",&c,&multiplier);
             --c;
-            // check if r is valid or not
-            if(c >= col || c < 0){
-            printf("Invalid input\nReturn to Main Menu\n");
+            if(c >= col || c < 0)
+            {
+            printf("Invalid input\n");
+            printf("Return to Main Menu\n");
             break;
             }
-
-            // multiply each value of Column c with that constant
-            for(int j = 0;j < row;++j){
-            mat[j][c] *= constant;
+            
+            for(int j = 0;j < row;++j)   // multiply each value of the column by the constant
+            {
+               mat[j][c] *= multiplier;
             }
             break;
             default:
@@ -148,13 +174,16 @@ while(1)
             break;
           case 4:
           printf("Current Matrix is -\n");
-          if(row == 0 || col == 0){
-          printf("Matrix is empty\n");
+          if(row == 0 || col == 0)
+          {
+             printf("No Matrix\n");
           }
-          for(int i = 0;i < row;++i){
-          for(int j = 0;j < col;++j){
-          printf("%d ", mat[i][j]);
-          }
+          for(int i = 0;i < row;++i)
+          {
+             for(int j = 0;j < col;++j)
+             {
+                printf("%d ", mat[i][j]);
+             }
           printf("\n");
           }
           break;
