@@ -74,7 +74,8 @@ while(1)   // program will continue unless user enters 5
         
         if(a >= row || a < 0 || b >= row || b < 0)
         {
-           printf("Invalid input\nReturn to Main Menu\n");   // error if invalid or return to main menu
+           printf("Invalid input\n");   // error if invalid or return to main menu
+           printf("Return to Main Menu\n);
            break;
         }
         
